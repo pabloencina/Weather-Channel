@@ -1,0 +1,70 @@
+.card{
+    margin: auto;
+    margin-top: 100px;
+    background-color: #86b6fe;
+    color: white;
+}
+#icono{
+    background-color: #86b6fe;
+    color: white;
+}
+body{
+    background-color: #d3d7d9;
+}
+.ciudad{
+    display: inline-block;
+    background-color: #86b6fe;
+}
+#temperatura{
+    text-align: center;
+}
+#temperaturaMin{
+    text-align: center;
+}
+#sensacionTermica{
+    text-align: center;
+}
+#descripcion{
+    text-align: center;
+}
+#tiempo{
+    text-align: center;
+}
+#icono{
+    text-align: center;
+}
+.rounded{
+    width: 100%;
+    height: 100%;
+}
+h1{
+    display: block;
+    color:white;
+    margin-top: 50px;
+    text-align: center;   
+}
+#inp{
+    border-radius: 10px;
+    background-color: white;
+    height: 40px;
+    color: gray;
+    border-style: none;
+    text-align: center;
+}
+#inp:focus{
+    border: none;
+}
+#inp:active{
+    border: none;
+}
+#alert1{
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+}
+#alert2{
+    
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+}

@@ -6,14 +6,14 @@ let descripcion = document.getElementById("descripcion");
 let temperatura = document.getElementById("temperatura");
 let temperaturaMin = document.getElementById("temperaturaMin");
 let sensacionTermica = document.getElementById("sensacionTermica");
-let icono = document.getElementById("icono");
+let divIcono = document.getElementById("div-icono");
 let alert1 = document.getElementById("alert1");
 let alert2 = document.getElementById("alert2");
 
 const urlGetWeather = "http://api.openweathermap.org/data/2.5/weather";
 
 const api_key = "151449b891e05e554faf05b764accced";
-//const icons = "http://openweathermap.org/img/wn/10d@2x.png";
+
 // https://openweathermap.org/price
 
 const mostrarWeather = async function (query) {
@@ -23,7 +23,7 @@ const mostrarWeather = async function (query) {
     );
     if (resultado.status === 200) {
       let resultadoJs = await resultado.json();
-      agregarContenido(resultadoJs);
+      await agregarContenido(resultadoJs);
     } else {
       mostrarCiudadInexistente();
     }
@@ -32,28 +32,30 @@ const mostrarWeather = async function (query) {
   }
 };
 
-const urlIconoClima = "http://openweathermap.org/img/wn/.png";
+const urlIconoClima = "http://openweathermap.org/img/wn/";
+//const icons = "http://openweathermap.org/img/wn/10d@2x.png";
 
-const mostrarIconoClima = async function () {
+const getIconoClimaUrl = async function (weatherId) {
   try {
-    let resul = await fetch(`${urlIconoClima}${weather[0].id}.png`);
+    let resul = await fetch(`${urlIconoClima}${weatherId}.png`);
     //let resultadoJson = await resul.json();
     console.log(resul);
-    return resul;
+    return resul.url;
   } catch (error) {
     console.log(error);
   }
 };
 
-function agregarContenido(resultadoJs) {
+async function agregarContenido(resultadoJs) {
   console.log(resultadoJs);
   ciudad.innerHTML = `${resultadoJs.name}, ${resultadoJs.sys.country}`;
   tiempo.innerHTML = `${resultadoJs.weather[0].main}`;
   descripcion.innerHTML = `${resultadoJs.weather[0].description}.`;
-  temperatura.innerHTML = `temp: ${resultadoJs.main.temp} <sup>°</sup>`;
-  temperaturaMin.innerHTML = `min: ${resultadoJs.main.temp_min} <sup>°</sup>`;
-  sensacionTermica.innerHTML = `sensación térmica: ${resultadoJs.main.feels_like} <sup>°</sup>`;
-  icono.innerHTML = mostrarIconoClima();
+  temperatura.innerHTML = `temp: ${resultadoJs.main.temp}°C`;
+  temperaturaMin.innerHTML = `min: ${resultadoJs.main.temp_min}°C`;
+  sensacionTermica.innerHTML = `sensación térmica: ${resultadoJs.main.feels_like}°C`;
+  divIcono.innerHTML = ` <img 'id='' src='${await getIconoClimaUrl(resultadoJs.weather[0].icon)}'>`
+  ;
 }
 
 btn.addEventListener("click", function () {
